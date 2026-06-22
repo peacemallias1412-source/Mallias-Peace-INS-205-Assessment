@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<!-- TASK 1: DOCTYPE declaration establishes this as an HTML5 document.
+     The lang="en" attribute helps browsers and screen readers identify
+     the page's primary language as English. -->
+<html lang="en">
+
+<head>
+  <!-- TASK 1: charset="UTF-8" ensures the browser correctly encodes
+       all characters, including special symbols and punctuation. -->
+  <meta charset="UTF-8">
+
+  <!-- viewport meta tag makes the page scale correctly on mobile screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TASK 1: A meaningful page title that includes the student's name. -->
+  <title>Mallias Peace Nenwie — INS205 Assessment | University of Jos</title>
+
+  <style>
+    /* ============================================================
+       GLOBAL RESET
+       Removes default browser margins and padding, and switches
+       all elements to border-box sizing so padding is included
+       inside declared widths — this makes layout math predictable.
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ============================================================
+       BODY — BASE TYPOGRAPHY & BACKGROUND
+       System font stack avoids any external font dependency.
+       A soft ivory-green (#f5fbf7) background gives the page
+       a calm, refined feel that complements the emerald palette.
+       ============================================================ */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   Helvetica, Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #1c2b1e;
+      background-color: #f5fbf7;
+    }
+
+    /* ============================================================
+       HEADER / HERO SECTION
+       Deep forest-green to emerald gradient creates a rich,
+       distinctive identity. The clip-path uses a downward chevron
+       (tent) shape — both sides slope inward to a center point —
+       giving the hero a different silhouette from a plain rectangle.
+       text-align: center on the header is what centers the h1.
+       ============================================================ */
+    header {
+      background: linear-gradient(150deg, #052e16 0%, #15803d 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 72px 24px 120px;
+
+      /* clip-path: chevron pointing downward at center bottom.
+         Coordinates: top-left, top-right, bottom-right (high),
+         center bottom (lowest point), bottom-left (high). */
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+      margin-bottom: -20px;
+    }
+
+    /* ============================================================
+       TASK 1: h1 — Page Heading
+       Must be centered (via parent header's text-align: center)
+       and visually distinct from body text.
+       Large bold uppercase with a gold ::after accent bar
+       ensures clear visual hierarchy above any other text.
+       ============================================================ */
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    /* Decorative gold accent bar below the h1.
+       Gold contrasts with the green header to create elegance. */
+    h1::after {
+      content: "";
+      display: block;
+      width: 72px;
+      height: 4px;
+      background: #fbbf24;         /* warm amber gold */
+      border-radius: 2px;
+      margin: 14px auto 0;         /* auto left/right centers the bar */
+    }
+
+    /* Subtitle line — course name and institution */
+    header .subtitle {
+      font-size: 1rem;
+      color: #86efac;              /* soft light green */
+      margin-top: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tagline — personal quote below the subtitle */
+    header .tagline {
+      font-size: 0.95rem;
+      color: #d1fae5;              /* near-white mint */
+      margin-top: 12px;
+      font-style: italic;
+      letter-spacing: 0.2px;
+    }
+
+    /* ============================================================
+       MAIN CONTENT WRAPPER
+       max-width and auto horizontal margins center the block.
+       Padding adds breathing room on all screen sizes.
+       ============================================================ */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* ============================================================
+       TASK 2: SECTION CARDS
+       Each <section> is a white card with a left accent border in
+       forest green. On hover, the card lifts and gains a soft
+       emerald-tinted shadow — more refined than a plain offset.
+       ============================================================ */
+    section {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 36px 40px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 18px rgba(5, 46, 22, 0.08);
+
+      /* Left border uses the emerald accent color */
+      border-left: 5px solid #15803d;
+
+      /* Both transform and box-shadow transition for a richer effect */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Hover: card lifts AND gains a deeper green-tinted shadow */
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(5, 46, 22, 0.16);
+    }
+
+    /* Section heading (h2) — small, uppercase, emerald green */
+    section h2 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: #15803d;              /* emerald green */
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #dcfce7;   /* very light mint divider */
+    }
+
+    section p {
+      color: #374151;
+      margin-bottom: 12px;
+    }
+
+    section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============================================================
+       INFO GRID (About Me section)
+       CSS Grid with two columns displays key–value pairs neatly.
+       A <dl> (definition list) is semantically correct HTML for
+       labelled data like name, matric number, level, and faculty.
+       ============================================================ */
+    dl.info-grid {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      row-gap: 10px;
+      column-gap: 16px;
+    }
+
+    dl.info-grid dt {
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #15803d;              /* emerald to match section headings */
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding-top: 2px;
+    }
+
+    dl.info-grid dd {
+      color: #1c2b1e;
+    }
+
+    /* Divider line separating the info grid from bio paragraphs */
+    .bio-text {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #dcfce7;
+    }
+
+    /* ============================================================
+       HIGHLIGHT PILL — emphasizes course name inline.
+       Uses green-tinted background to match the page palette.
+       ============================================================ */
+    .pill {
+      display: inline-block;
+      background: #f0fdf4;
+      color: #15803d;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 20px;
+      padding: 2px 12px;
+      border: 1px solid #86efac;
+    }
+
+    /* ============================================================
+       TASK 2: CONTACT SECTION — SEND EMAIL BUTTON
+       Styled anchor element with id="send-btn".
+       display: inline-block is required because <a> is inline by
+       default — without it, padding wouldn't create the button shape.
+       The background color here is a placeholder: the Task 3 script
+       will replace it with a unique color derived from the matric no.
+       ============================================================ */
+    .contact-intro {
+      margin-bottom: 20px;
+    }
+
+    .contact-email {
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 24px;
+    }
+
+    .contact-email span {
+      font-weight: 600;
+      color: #15803d;              /* green to match palette */
+    }
+
+    .btn-wrapper {
+      text-align: center;
+    }
+
+    /* The send button: styled as an anchor with full button appearance */
+    #send-btn {
+      display: inline-block;
+      padding: 14px 52px;
+      background: #15803d;         /* default — overridden by Task 3 JS */
+      color: #ffffff;
+      text-decoration: none;       /* removes underline from anchor tag */
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      letter-spacing: 0.3px;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    #send-btn:hover {
+      opacity: 0.87;
+      transform: translateY(-2px);   /* subtle lift on hover */
+    }
+
+    #send-btn:active {
+      transform: translateY(0);      /* snaps back on click */
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+
+    /* ============================================================
+       RESPONSIVE DESIGN
+       On screens narrower than 540px, reduce heading size and
+       stack the info-grid labels above values for readability.
+       ============================================================ */
+    @media (max-width: 540px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      section {
+        padding: 28px 20px;
+      }
+
+      /* Stack label above value on small screens */
+      dl.info-grid {
+        grid-template-columns: 1fr;
+        row-gap: 2px;
+      }
+
+      dl.info-grid dt {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       HEADER
+       The h1 is centered via text-align: center on the parent
+       header element. It is visually distinct through large font
+       size, uppercase transform, bold weight, wide letter-spacing,
+       and the gold pseudo-element accent bar beneath it.
+       ============================================================ -->
+  <header>
+    <h1>Mallias Peace Nenwie</h1>
+    <p class="subtitle">INS205 &mdash; Application Design &amp; Development &bull; University of Jos</p>
+    <p class="tagline">&ldquo;Turning ideas into interfaces, one line at a time.&rdquo; 💻✨</p>
+  </header>
+
+
+  <main>
+
+    <!-- ============================================================
+         TASK 2: SECTION 1 — ABOUT ME
+         Contains the student's full name, department, faculty,
+         matriculation number, level, and university as required,
+         followed by a personal profile in the bio-text section.
+         ============================================================ -->
+    <section id="about">
+      <h2>About Me</h2>
+
+      <!-- dl (definition list) is the semantically correct HTML
+           element for a set of term-description pairs like this. -->
+      <dl class="info-grid">
+        <dt>Full Name</dt>
+        <dd>Mallias Peace Nenwie</dd>
+
+        <dt>Department</dt>
+        <dd>Computer Science</dd>
+
+        <dt>Faculty</dt>
+        <dd>Faculty of Computing</dd>
+
+        <dt>Matric Number</dt>
+        <dd>UJ/2024/NS/0230</dd>
+
+        <dt>Level</dt>
+        <dd>200 Level</dd>
+
+        <dt>University</dt>
+        <dd>University of Jos, Plateau State, Nigeria</dd>
+      </dl>
+
+      <!-- Personal profile — separated from the info grid by a top border -->
+      <div class="bio-text">
+        <p>
+          I am Mallias Peace Nenwie, a 200-level Computer Science student at the
+          University of Jos. I am drawn to the intersection of technology and
+          creativity — the idea that the same logical thinking that powers software
+          can also be used to design experiences that feel human, intuitive, and
+          beautiful.
+        </p>
+        <p>
+          Outside of my studies, I enjoy reading, listening to music, and exploring
+          digital art. These creative interests have deepened my appreciation for
+          design and user experience, and have influenced the way I think about
+          building technology that people actually enjoy using.
+        </p>
+        <p>
+          My current focus is on strengthening my foundation in HTML, CSS, Python,
+          and JavaScript as I work toward a long-term career in UI/UX Design
+          and Front-End Development — building interfaces that are both functional
+          and genuinely satisfying to interact with.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SKILLS SECTION
+         Lists programming languages, web technologies, and interests.
+         ============================================================ -->
+    <section id="skills">
+      <h2>Skills</h2>
+
+      <p>Programming Languages: Python, JavaScript</p>
+      <p>Web Technologies: HTML5, CSS3</p>
+      <p>Other Interests: UI/UX Design, Digital Art, Front-End Development</p>
+    </section>
+
+
+    <!-- ============================================================
+         TASK 2: SECTION 2 — ABOUT THIS PAGE
+         Describes the purpose of the page and which course it
+         relates to, with additional reflective content.
+         ============================================================ -->
+    <section id="about-page">
+      <h2>About This Page</h2>
+
+      <p>
+        This webpage was developed as part of the
+        <span class="pill">INS205 &mdash; Application Design and Development</span>
+        course assessment at the University of Jos.
+      </p>
+
+      <p>
+        What I find most compelling about web development is how much a well-crafted
+        page can communicate — not just information, but personality, care, and
+        intentionality. A thoughtfully designed interface says something about
+        the person who built it.
+      </p>
+
+      <p>
+        This project applies <strong>HTML5</strong>, <strong>CSS3</strong>, and
+        basic <strong>JavaScript</strong> to create a structured, styled, and
+        interactive personal webpage. Through it, I have developed a clearer
+        understanding of semantic document structure, visual hierarchy, responsive
+        layout, and how JavaScript can interact with the DOM at runtime.
+      </p>
+
+      <p>
+        Going forward, I hope to deepen my skills in both design and development —
+        building digital experiences that are accessible, visually refined, and
+        genuinely useful to the people who use them.
+      </p>
+    </section>
+
+
+    <!-- ============================================================
+         TASK 2: CONTACT SECTION
+         The anchor tag below is styled to look like a button.
+         Its href uses a mailto: URL so clicking it opens the user's
+         default email client with the recipient address pre-filled.
+         id="send-btn" must stay exactly as-is — the Task 3 script
+         targets this id to apply the matric-derived color.
+         The visible text reads exactly "Send Email" as specified.
+         ============================================================ -->
+    <section id="contact">
+      <h2>Contact</h2>
+
+      <p class="contact-intro">
+        Have a question, a collaboration idea, or just want to connect?
+        Click the button below and your email client will open with my
+        university address already filled in.
+      </p>
+
+      <p class="contact-email">
+        Email: <span>2024NS0230@unijos.edu.ng</span>
+      </p>
+
+      <div class="btn-wrapper">
+        <!--
+          mailto: makes this a functional email link, not just a button.
+          id="send-btn" is required by the Task 3 script below.
+          Text reads "Send Email" exactly as the assessment specifies.
+        -->
+        <a id="send-btn" href="mailto:2024NS0230@unijos.edu.ng">Send Email</a>
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer>
+    <p>&copy; 2026 Mallias Peace Nenwie &bull; University of Jos &bull; INS205</p>
+  </footer>
+
+
+  <!-- ============================================================
+       TASK 3: MATRIC NUMBER TO BUTTON COLOUR SCRIPT
+       Placed just before the closing </body> tag as instructed.
+       The script hashes the matric number string to produce a
+       deterministic integer, maps it to a colour hue (0–359°),
+       and applies that unique HSL colour to the #send-btn element.
+       Only the matric constant value below was changed.
+       Everything else is left exactly as provided.
+       ============================================================ -->
+  <script>
+    /* -------------------------------------------------------
+       Matric-number → button colour
+       Replace the matric value below with your own number.
+       ------------------------------------------------------- */
+    const matric = "UJ/2024/NS/0230"; // <-- CHANGE THIS TO YOUR MAT. NO.
+
+    /* CHANGE NOTHING BEYOND THIS POINT - CHANGE NOTHING BEYOND THIS POINT */
+
+    function hashString(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
+      }
+      return hash;
+    }
+
+    // Normalise input
+    const normalised = matric.trim().toUpperCase();
+
+    // Map the hash to a hue value between 0 and 359 degrees
+    const hue = hashString(normalised) % 360;
+
+    // Build an HSL colour: fixed saturation & lightness, varying hue
+    const buttonColour = `hsl(${hue}, 65%, 45%)`;
+
+    // Apply the colour to the Send Email button
+    document.getElementById("send-btn").style.background = buttonColour;
+  </script>
+
+</body>
+</html>
